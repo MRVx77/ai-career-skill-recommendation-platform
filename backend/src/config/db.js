@@ -1,5 +1,8 @@
 import pg from "pg";
 import { Pool } from "pg";
+import dns from "dns";
+
+dns.setDefaultResultOrder("ipv4first");
 
 export const connectDB = async () => {
   const pool = new Pool({
