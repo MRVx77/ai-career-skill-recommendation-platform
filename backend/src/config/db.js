@@ -3,11 +3,11 @@ import { Pool } from "pg";
 
 export const connectDB = async () => {
   const pool = new Pool({
-    host: "localhost",
-    user: "postgres",
-    password: process.env.DB_PASSWORD,
-    database: "ai_career_platform",
-    port: 5432,
+    connectionString: process.env.DATABASE_URL,
+    ssl:
+      process.env.NODE_ENV === "production"
+        ? { rejectUnauthorized: false }
+        : false,
   });
 
   try {

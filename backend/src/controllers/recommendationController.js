@@ -12,7 +12,6 @@ const pool = new Pool({
 });
 
 export const getRecommendations = async (req, res) => {
-  console.log("Request body received:", req.body);
   if (!req.body) {
     return res.status(400).json({ message: "No body received!" });
   }
