@@ -1,15 +1,6 @@
 import pg from "pg";
 import { generateAIRecommendations } from "../services/aiService.js";
-
-const { Pool } = pg;
-
-const pool = new Pool({
-  user: "postgres",
-  host: "localhost",
-  database: "ai_career_platform",
-  password: process.env.DB_PASSWORD,
-  port: 5432,
-});
+import { pool } from "../config/db.js";
 
 export const getRecommendations = async (req, res) => {
   if (!req.body) {

@@ -1,22 +1,21 @@
-import pg from "pg";
-import { Pool } from "pg";
-import dns from "dns";
+import dotenv from "dotenv";
+dotenv.config();
 
-dns.setDefaultResultOrder("ipv4first");
+import { Pool } from "pg";
+
+export const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false, // required for Render Postgres
+  },
+});
 
 export const connectDB = async () => {
-  const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl:
-      process.env.NODE_ENV === "production"
-        ? { rejectUnauthorized: false }
-        : false,
-  });
-
   try {
-    await pool.connect();
-    console.log("Database is connected");
+    await pool.query("SELECT 1");
+    console.log("✅ Database connected successfully");
   } catch (error) {
-    console.error("Database connection error:", error);
+    console.error("❌ Database connection error:", error);
+    process.exit(1);
   }
 };

@@ -1,19 +1,9 @@
-import express from "express";
 import jwt from "jsonwebtoken";
-import pg from "pg";
 import bcrypt from "bcryptjs";
+import { pool } from "../config/db.js";
 import dotenv from "dotenv";
 
 dotenv.config();
-
-const { Pool } = pg;
-const pool = new Pool({
-  user: "postgres",
-  host: "localhost",
-  database: "ai_career_platform",
-  password: process.env.DB_PASSWORD,
-  port: 5432,
-});
 
 //--------------- registerUser ----------------//
 const registerUser = async (req, res) => {
@@ -41,17 +31,18 @@ const registerUser = async (req, res) => {
       { expiresIn: "7d" }
     );
 
-    res.json({
+    res.status(201).json({
       message: "User registered successfully",
       token,
       user,
     });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: error.message });
+    console.error(error);
+    res.status(500).json({ message: "Registration failed" });
   }
 };
 
+//--------------- loginUser ----------------//
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
@@ -88,8 +79,8 @@ const loginUser = async (req, res) => {
       },
     });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: error.message });
+    console.error(error);
+    res.status(500).json({ message: "Login failed" });
   }
 };
 
