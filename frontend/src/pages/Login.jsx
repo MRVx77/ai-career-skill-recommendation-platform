@@ -31,6 +31,8 @@ const Login = () => {
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-6 sm:p-8">
         <h1 className="text-2xl font-bold text-center mb-6">Login</h1>
+        <p className="text-sm font-bold text-gray-600">Email: test@gmail.com</p>
+        <p className="text-sm font-bold text-gray-600">pass: 123456</p>
 
         <form className="space-y-4" onSubmit={onSubmitHandler}>
           <input

@@ -49,7 +49,9 @@ const Register = () => {
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-6 sm:p-8">
         <h2 className="text-2xl font-bold text-center mb-6">Create Account</h2>
-
+        <p className="text-sm font-bold mb-2 text-gray-600">
+          Go to login Page if you are here for testing/checking.
+        </p>
         <form className="space-y-4" onSubmit={onSubmit}>
           <input
             onChange={(e) => setName(e.target.value)}
